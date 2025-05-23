@@ -1,0 +1,72 @@
+Soil Classification using Transfer Learning with ResNet34
+
+Project Overview:
+This project focuses on classifying different types of soil images into one of four categories: Alluvial soil, Black Soil, Clay soil, and Red soil. The dataset used is from a Kaggle competition and includes labeled training images and a set of test images. The approach leverages a pre-trained ResNet34 model for transfer learning, with a modified final layer to suit the classification task.
+
+Dataset Description:
+
+The dataset includes labeled training images and unlabeled test images.
+Soil types are mapped as follows:
+
+  * Alluvial soil → 0
+  * Black Soil → 1
+  * Clay soil → 2
+  * Red soil → 3
+
+Preprocessing Steps:
+
+1. The training CSV is loaded and soil type labels are mapped to numerical values.
+2. Images in the training directory are verified and resolved with respect to their extensions (.jpg, .jpeg, .png).
+3. Images not found are excluded from the dataset.
+
+Image Transformation:
+
+For training: Resize, random horizontal flip, random rotation, color jittering, normalization.
+For validation/testing: Resize and normalization only.
+
+Custom Dataset Class:
+A PyTorch `Dataset` class named `SoilDataset` is defined to load and transform soil images along with their corresponding labels.
+
+Data Split:
+
+Training and validation split: 80/20 using stratified sampling.
+
+Model Architecture:
+
+* ResNet34 is loaded with pre-trained weights.
+* The final fully connected layer is replaced with a layer having 4 outputs for classification.
+* The model is trained using the CrossEntropyLoss.
+
+Training Configuration:
+
+* Optimizer: Adam with learning rate 1e-4
+* Scheduler: StepLR with step size 5 and gamma 0.5
+* Device: GPU (if available), else CPU
+
+Training Performance:
+
+Number of Epochs: 15
+Final training loss after 15 epochs: 0.0250
+Final per-class F1 scores:
+
+  * Alluvial soil: 0.9714
+  * Black Soil: 0.9787
+  * Clay soil: 0.9367
+  * Red soil: 0.9903
+ Minimum F1 score: 0.9367
+
+Testing Phase:
+
+* Test images with unsupported formats (.webp, .gif) are converted to .jpg for compatibility.
+* The same image resolution strategy as used in training is applied to test images.
+* A separate custom `Dataset` class named `TestDataset` is used for inference.
+
+Inference and Submission:
+
+* The model trained above is loaded with its saved weights.
+* Inference is run on the test dataset.
+* Predictions are mapped back to original soil type labels.
+* Final predictions are written into a CSV file `submission.csv` with columns `image_id` and `soil_type`.
+
+Conclusion:
+The project achieved strong classification performance with high F1 scores across all classes. The trained model is robust, and the test predictions are saved in a Kaggle-compatible submission format.
