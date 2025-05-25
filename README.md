@@ -1,95 +1,132 @@
-# Soil Type Classification using Deep Learning 🌱
+# 🌱 Soil Image Classification — ANNAM.AI Orientation Challenges
 
-This project was developed during the ANNAM.AI orientation Kaggle competition. It focuses on *classifying soil types* from image data using a deep learning model based on a fine-tuned ResNet34 architecture.
+This repository contains two challenges from the **ANNAM.AI orientation Kaggle competition**:
+
+- **Challenge 1:** Soil type classification using a fine-tuned ResNet34 model.
+- **Challenge 2:** Anomaly detection in soil images using a convolutional autoencoder.
 
 ---
 
 ## 🧠 Architecture Overview
 
-The model is built using a *transfer learning approach* with *ResNet34*, fine-tuned for soil classification. The pipeline involves:
-- Image preprocessing using standard transforms.
-- Training on labeled soil images.
-- Evaluation and inference on test images.
+### 🔹 Challenge 1: ResNet34 Classifier
 
-![Architecture Diagram](./docs/cards/architecure.png)
+This model uses a **transfer learning approach** with **ResNet34**, fine-tuned for supervised soil classification. The workflow includes:
+
+- Image preprocessing using `torchvision.transforms`
+- Model training and evaluation
+- CSV generation for Kaggle submission
+
+![ResNet34 Architecture](./challenge-1/docs/cards/architecure.png)
+
+---
+
+### 🔹 Challenge 2: Autoencoder for Anomaly Detection
+
+A **convolutional autoencoder** is trained using only normal soil images (`label = 1`). At inference time, reconstruction error is used to detect anomalies (`label = 0`).
+
+![Autoencoder Architecture](./challenge-2/docs/cards/architecture-2.png)
 
 ---
 
 ## 📁 Folder Structure
 
-
+```
 .
-├── docs/cards
-│   ├── architecure.png            # Model architecture image
-│   ├── ml-metrics.json            # Evaluation metrics
-│   └── project_card.ipynb         # Project summary notebook
+├── challenge-1/
+│   ├── docs/cards/
+│   │   ├── architecure.png
+│   │   ├── ml-metrics.json
+│   │   └── project_card.ipynb
+│   ├── notebook/
+│   │   └── soil_classification_annam.ipynb
+│   ├── submission.csv
+│   └── transcript.txt
 │
-├── notebook
-│   └── soil_classification_annam.ipynb  # Main training & inference notebook
+├── challenge-2/
+│   ├── docs/cards/
+│   │   ├── architecture-2.png
+│   │   └── project_card_2.ipynb
+│   ├── notebook/
+│   │   └── binary-classification-02.ipynb
 │
-├── README.md                      # Project documentation (you're reading it)
-├── requirements.txt              # Dependencies
-├── submission.csv                # Sample submission format
-├── transcript.txt                # Summary/transcript of project insights
-
+├── requirements.txt
+└── README.md  ← (You're here)
+```
 
 ---
 
 ## ⚙️ Setup Instructions
 
-### 1. Clone the repository
+### 1. Clone the Repository
 
-bash
+```bash
 git clone <repo-url>
 cd <repo-folder>
+```
 
+### 2. Create and Activate a Virtual Environment (Recommended)
 
-### 2. Create and activate a virtual environment (optional but recommended)
-
-bash
+```bash
 python -m venv venv
-source venv/bin/activate    # On Windows: venv\Scripts\activate
+source venv/bin/activate    # Windows: venv\Scripts\activate
+```
 
+### 3. Install Dependencies
 
-### 3. Install dependencies
-
-bash
+```bash
 pip install -r requirements.txt
-
+```
 
 ---
 
 ## 🚀 Usage
 
-### 🧪 Run the Notebook
+### 🧪 Challenge 1 — ResNet34 Classifier
 
-Open the main notebook in Jupyter or Colab:
+Navigate to the notebook and run:
 
-bash
-jupyter notebook notebook/soil_classification_annam.ipynb
+```bash
+jupyter notebook challenge-1/notebook/soil_classification_annam.ipynb
+```
 
+Steps include:
+- Loading the soil classification dataset
+- Preprocessing with data augmentation
+- Fine-tuning ResNet34
+- Evaluating model performance
+- Generating Kaggle-formatted submission
 
-Follow the cells to:
-- Load and preprocess data
-- Train the model
-- Evaluate results
-- Generate predictions
+---
 
-### 📤 Submission
+### 🧪 Challenge 2 — Autoencoder Anomaly Detection
 
-Predictions are stored in submission.csv — format it as per the Kaggle competition requirements.
+Run the notebook using:
+
+```bash
+jupyter notebook challenge-2/notebook/binary-classification-02.ipynb
+```
+
+Steps include:
+- Training autoencoder on normal (label = 1) images
+- Reconstructing and calculating MSE
+- Flagging anomalies based on reconstruction error threshold
+- Generating submission file (if needed)
 
 ---
 
 ## 📊 Evaluation Metrics
 
-Model performance metrics are logged in [ml-metrics.json](./docs/cards/ml-metrics.json) and analyzed in the notebook.
+- **Challenge 1 (ResNet34):** Accuracy, F1 Score, Precision, Recall — stored in [`ml-metrics.json`](./challenge-1/docs/cards/ml-metrics.json)
+- **Challenge 2 (Autoencoder):** MSE-based anomaly detection — analyzed in the notebook
 
 ---
 
 ## 📜 Notes
 
-- Model achieves significant accuracy using transfer learning and data augmentation.
-- Easily scalable for multi-class soil classification with more data.
+- The ResNet34 model leverages **transfer learning** for fast convergence and high accuracy.
+- The autoencoder generalizes well and serves as a lightweight **unsupervised anomaly detector**.
+- Both challenges are modular and easy to extend with new architectures or datasets.
 
 ---
+
