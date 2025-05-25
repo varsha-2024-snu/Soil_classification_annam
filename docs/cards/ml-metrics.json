@@ -1,0 +1,14 @@
+{
+  "score": 0.9367,
+  "scoreType": "f1_min",
+  "label": "Minimum Per-Class F1 Score",
+  "displayScore": "0.9367",
+  "displayScoreUnit": "",
+  "summary": {
+    "Alluvial soil F1": 0.9714,
+    "Black Soil F1": 0.9787,
+    "Clay soil F1": 0.9367,
+    "Red soil F1": 0.9903,
+    "Mean F1": 0.9698
+  }
+}
