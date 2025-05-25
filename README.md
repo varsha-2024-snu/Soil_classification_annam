@@ -1,4 +1,3 @@
-# Soil_classification_annam
 # Soil Type Classification using Deep Learning 🌱
 
 This project was developed during the ANNAM.AI orientation Kaggle competition. It focuses on **classifying soil types** from image data using a deep learning model based on a fine-tuned ResNet34 architecture.
